@@ -6,15 +6,6 @@ describe("lang-alpha-prob", () => {
 		expect(typeof lang).to.equal("object");
 	});
 
-	it("should throw an error when trying to access the metrics before setting a language", () => {
-		lang.set([]);
-
-		expect(lang.dictionary).to.throw("You need the set the language before accessing its metrics.");
-		expect(lang.alphabet).to.throw("You need the set the language before accessing its metrics.");
-		expect(lang.probabilities).to.throw("You need the set the language before accessing its metrics.");
-		expect(lang.matrix).to.throw("You need the set the language before accessing its metrics.");
-	});
-
 	// -- set -- \\
 	it("should have a `set` method", () => {
 		expect(typeof lang.set).to.equal("function");
@@ -22,7 +13,7 @@ describe("lang-alpha-prob", () => {
 
 	describe("lang.set", () => {
 		it("should throw an error if not passed an array of string", () => {
-			expect(lang.set.bind(lang, "Hello, world!")).to.throw("The language supplied is not an Array.");
+			expect(lang.set.bind(lang, "Hello, world!")).to.throw("The language supplied must be an Array or a Set.");
 		});
 
 		it("should return the function `lang`", () => {
@@ -80,6 +71,27 @@ describe("lang-alpha-prob", () => {
 
 		it("should not include duplicates", () => {
 			expect(alphabet.length).to.equal(7);
+		});
+	});
+
+	// -- probabilities -- \\
+	it("should have a `probabilities` method", () => {
+		expect(typeof lang.probabilities).to.equal("function");
+	});
+
+	describe("lang.probabilities", () => {
+		lang.set(["hello", "world"]);
+
+		let probabilities = lang.probabilities();
+
+		it("should return an array of numbers of the exact same size as `lang.alphabet`", () => {
+			expect(Array.isArray(probabilities)).to.be.true;
+
+			expect(probabilities.length).to.equal(lang.alphabet().length);
+		});
+
+		it("should sum up to exactly 1", () => {
+			expect(probabilities.reduce((acc, cur) => acc + cur)).to.equal(1);
 		});
 	});
 });
