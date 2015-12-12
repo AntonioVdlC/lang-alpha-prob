@@ -3,12 +3,12 @@ import lang from "../src/index.js";
 
 describe("lang-alpha-prob", () => {
 	it("should export an object", () =>{
-		expect(typeof lang).to.equal("object");
+		expect(lang).to.be.an("object");
 	});
 
 	// -- set -- \\
 	it("should have a `set` method", () => {
-		expect(typeof lang.set).to.equal("function");
+		expect(lang.set).to.be.a("function");
 	});
 
 	describe("lang.set", () => {
@@ -23,7 +23,7 @@ describe("lang-alpha-prob", () => {
 
 	// -- dictionary -- \\
 	it("should have a `dictionary` method", () => {
-		expect(typeof lang.dictionary).to.equal("function");
+		expect(lang.dictionary).to.be.a("function");
 	});
 
 	describe("lang.dictionary", () => {
@@ -32,22 +32,21 @@ describe("lang-alpha-prob", () => {
 		let dictionary = lang.dictionary();
 
 		it("should return an array", () => {
-			expect(Array.isArray(dictionary)).to.be.true;
+			expect(dictionary).to.be.an.instanceof(Array);
 		});
 
 		it("should include all the words from the language", () => {
-			expect(dictionary).to.contain("hello");
-			expect(dictionary).to.contain("world");
+			expect(dictionary).to.have.members(["hello", "world"]);
 		});
 
 		it("should not include duplicates", () => {
-			expect(dictionary.length).to.equal(2);
+			expect(dictionary).to.have.length(2);
 		});
 	});
 
 	// -- alphabet -- \\
 	it("should have a `alphabet` method", () => {
-		expect(typeof lang.alphabet).to.equal("function");
+		expect(lang.alphabet).to.be.a("function");
 	});
 
 	describe("lang.alphabet", () => {
@@ -56,27 +55,21 @@ describe("lang-alpha-prob", () => {
 		let alphabet = lang.alphabet();
 
 		it("should return an array", () => {
-			expect(Array.isArray(alphabet)).to.be.true;
+			expect(alphabet).to.be.an.instanceof(Array);
 		});
 
 		it("should include all the letters from the language", () => {
-			expect(alphabet).to.contain("h");
-			expect(alphabet).to.contain("e");
-			expect(alphabet).to.contain("l");
-			expect(alphabet).to.contain("o");
-			expect(alphabet).to.contain("w");
-			expect(alphabet).to.contain("r");
-			expect(alphabet).to.contain("d");
+			expect(alphabet).to.have.members(["h", "e", "l", "o", "w", "r", "d"]);
 		});
 
 		it("should not include duplicates", () => {
-			expect(alphabet.length).to.equal(7);
+			expect(alphabet).to.have.length(7);
 		});
 	});
 
 	// -- probabilities -- \\
 	it("should have a `probabilities` method", () => {
-		expect(typeof lang.probabilities).to.equal("function");
+		expect(lang.probabilities).to.be.a("function");
 	});
 
 	describe("lang.probabilities", () => {
@@ -85,9 +78,8 @@ describe("lang-alpha-prob", () => {
 		let probabilities = lang.probabilities();
 
 		it("should return an array of numbers of the exact same size as `lang.alphabet`", () => {
-			expect(Array.isArray(probabilities)).to.be.true;
-
-			expect(probabilities.length).to.equal(lang.alphabet().length);
+			expect(probabilities).to.be.an.instanceof(Array);
+			expect(probabilities).to.have.length(lang.alphabet().length);
 		});
 
 		it("should sum up to exactly 1", () => {
