@@ -19,3 +19,11 @@ script:
 - npm run coverage:check
 after_success:
 - npm run coverage:report
+deploy:
+  provider: npm
+  email: antonio.villagra.de.la.cruz@gmail.com
+  api_key:
+    secure: bNfKLLQu00Pe6G0clQHbESSKrauumZwuFEA72B2o3xQnpVgZH+Piee/kC6MHziT+HiGw8QhWIqphzpTCPKuBCIUqGFknpwlBjDUXhZMOOYSstv4pV5CmXRPhK+P+kQExfPsmH0Yb0XfA5JTTHfdoTu7TsbvNMNDOPZQgvBxQg2B5nePrqEM8WL+HvkQomot7vGNBf0Fhu+3yHbF75cyzLncHpicg1jnG55bBb5x2lWz+SPRij+M0j0xm9i/DwnRIx17jagJytytpJ3kzdp2haPx64+mXQSFEtLvFV4iYVNs2k2HdjmYg34GgaRlf0YJvHBwcp2hRoPDRCrmYbLBG+P7J6atBk/2kaGBAOeBSPKv9Rpz7uOilaWtixU/PtnHiEcjBfWPTfMU+XTs2oY5dSO2g9zIIRkeDXrskKL2pwIWSrQbi09d5cZJJPGq3Awh7vXgxgJQPh91bomXvKr1pntw9NtJCLwjBrrR+zpZpIQPJwE7Rh6oDpRSApQVo9+dNtQPgIZOp/3gBD5YOKoIC7E7elETslMyiIGmyPuEnG+KvthkU5c+pdmIXyKzMVB/3/8dtptDHPq8bBrMx6xWL1+ZReMOUaHw7ioQaNy/sMDR1lR6C5c+Ph4e528jyIeCP4rseRFZzST8r7OSDhhvhXNpbHvJqPiqEzf1i31G9oC0=
+  on:
+    repo: AntonioVdlC/lang-alpha-prob
+  skip_cleanup: true

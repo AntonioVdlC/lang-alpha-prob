@@ -1,7 +1,7 @@
 {
   "name": "lang-alpha-prob",
   "version": "0.1.0",
-  "description": "Calculates basic probabilistic information on the alphabet of a give language.",
+  "description": "Calculates basic probabilistic information on the alphabet of a given language.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
