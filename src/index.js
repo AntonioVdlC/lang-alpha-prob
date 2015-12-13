@@ -22,7 +22,6 @@ function setLanguage (language) {
 	// The language is not an array
 	if (!(Array.isArray(language) || language instanceof Set)) {
 		throw new TypeError("The language supplied must be an Array or a Set.");
-		return;
 	}
 
 	// Initialise internal variables
@@ -49,17 +48,35 @@ function setLanguage (language) {
 	dictionary = [...dictionary].sort();
 	alphabet = [...alphabet].sort();
 
-	// Initialise `probabilities` with `0`s
-	alphabet.forEach((letter) => { probabilities.push(0); });
+	// Initialise `probabilities` and `matrix` with `0`s
+	alphabet.forEach((letter) => {
+		probabilities.push(0);
+		matrix.push(alphabet.map((letter) => 0));
+	});
 	
-	// Calculate the number of occurencies of each letter in the dictionary
+	// Calculate the probability of each letter
 	dictionary.join("").split("").forEach((letter) => {
 		probabilities[alphabet.indexOf(letter)] ++;
 	});
 
-	// Compute the probability of each letter
 	let count = dictionary.join("").split("").length;
 	probabilities = probabilities.map((prob) => prob / count);
+
+	// Calculate the relative probability of a letter appearing after another
+	// in each word of the dictionary
+	dictionary.forEach((word) => {
+		word.split("").forEach((letter, index, word) => {
+			let i = alphabet.indexOf(letter);
+			let j = alphabet.indexOf(word[index + 1]);
+
+			matrix[i][j] ++;
+		});
+	});
+
+	matrix.forEach((col, i, matrix) => {
+		let total = col.reduce((acc, cur) => acc + cur);
+		matrix[i] = col.map((prob) => (total) ? prob / total : 0);
+	});
 
 	// Return the object for chaining
 	return this;
