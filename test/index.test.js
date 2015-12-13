@@ -86,4 +86,24 @@ describe("lang-alpha-prob", () => {
 			expect(probabilities.reduce((acc, cur) => acc + cur)).to.equal(1);
 		});
 	});
+
+	// -- matrix -- \\
+	it("should have a `matrix` method", () => {
+		expect(lang.matrix).to.be.a("function");
+	});
+
+	describe("lang.matrix", () => {
+		lang.set(["hello", "world"]);
+
+		let matrix = lang.matrix();
+
+		it("should return a 2D array of same dimensions", () => {
+			expect(matrix).to.be.instanceof(Array);
+
+			matrix.forEach((col) => {
+				expect(col).to.be.instanceof(Array);
+				expect(col).to.have.length(matrix.length);
+			});
+		});
+	});
 });
