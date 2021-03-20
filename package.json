@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "Calculates basic probabilistic information on the alphabet of a given language.",
   "main": "dist/index.js",
-  "jsnext:main": "src/index.js",
+  "module": "src/index.js",
+  "files": [
+    "dist/index.js",
+    "src/indes.js"
+  ],
   "scripts": {
     "prebuild": "npm run clean",
     "build": "babel src/index.js -o dist/index.js",
     "postbuild": "uglifyjs dist/index.js -o dist/index.js",
     "clean": "rm -rf dist && mkdir dist",
     "coverage:check": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "coverage:report": "cat ./coverage/lcov.info | codecov",
     "test": "istanbul cover -x *.test.js _mocha -- -R spec --compilers js:babel/register",
     "test:watch": "mocha -w --compilers js:babel/register",
     "preversion": "npm run test && npm run coverage:check",
@@ -21,7 +24,7 @@
     "type": "git",
     "url": "https://github.com/AntonioVdlC/lang-alpha-prob.git"
   },
-  "author": "Antonio Villagra De La Cruz <antonio.villagra.de.la.cruz@gmail.com> (http://antoniovdlc.me/)",
+  "author": "Antonio Villagra De La Cruz",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AntonioVdlC/lang-alpha-prob/issues"
@@ -29,7 +32,6 @@
   "devDependencies": {
     "babel": "^5.8.29",
     "chai": "^3.4.0",
-    "codecov.io": "^0.1.6",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "uglify-js": "^2.5.0"
